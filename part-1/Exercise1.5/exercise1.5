@@ -1,0 +1,49 @@
+Script started on Sat 30 Mar 2024 03:03:41 PM EDT
+n-d-itddevopsdockeruh/simple-web-service:ubuntule-web-service:ubuntu
+Unable to find image 'devopsdockeruh/simple-web-service:ubuntu' locally
+ubuntu: Pulling from devopsdockeruh/simple-web-service
+
+5d3b2c2d21bb: Pulling fs layer
+3fc2062ea667: Pulling fs layer
+75adf526d75b: Pulling fs layer
+965d4bbb586a: Pulling fs layer
+Digest:0sha256:d44e1dce398732e18c7c2bad9416a072f719af33498302b02929d4c112e88d2a 5.1132B/32B17MBB
+Status: Downloaded newer image for devopsdockeruh/simple-web-service:ubuntu
+5a4010f7b93dd1cd336da9c23c2129fc593951adc766af81d6d4286b67e08c39
+[japan@centos Exercise1.5]$ docker run -d -it devopsdockeruh/simple-web-service:alpine
+Unable to find image 'devopsdockeruh/simple-web-service:alpine' locally
+alpine: Pulling from devopsdockeruh/simple-web-service
+
+ba3557a56b15: Pulling fs layer
+1dace236434b: Pulling fs layer
+Digest:0sha256:dd4d367476f86b7d7579d3379fe446ae5dfce25480903fb0966fc2e5257e0543 5.1132B/32B17MBB
+Status: Downloaded newer image for devopsdockeruh/simple-web-service:alpine
+411258d0a5fa52b70cdcd0cf037e17a1f4b40f7237428568969fdc095a681a2f
+[japan@centos Exercise1.5]$ docker images
+REPOSITORY			    TAG	      IMAGE ID	     CREATED	   SIZE
+ubuntu				    22.04     ca2b0f26964c   4 weeks ago   77.9MB
+ubuntu				    latest    ca2b0f26964c   4 weeks ago   77.9MB
+devopsdockeruh/simple-web-service   ubuntu    4e3362e907d5   3 years ago   83MB
+devopsdockeruh/simple-web-service   alpine    fd312adc88e0   3 years ago   15.7MB
+[japan@centos Exercise1.5]$ docker exec -it 411 sh
+/usr/src/app # ls
+server	  text.log
+/usr/src/app # exit
+[japan@centos Exercise1.5]$ docker execc-it 411 sh
+/usr/src/app # tail -f ./text.log
+2024-03-30 19:07:32 +0000 UTC
+Secret message is: 'You can find the source code here: https://github.com/docker-hy'
+2024-03-30 19:07:34 +0000 UTC
+2024-03-30 19:07:36 +0000 UTC
+2024-03-30 19:07:38 +0000 UTC
+2024-03-30 19:07:40 +0000 UTC
+2024-03-30 19:07:42 +0000 UTC
+Secret message is: 'You can find the source code here: https://github.com/docker-hy'
+2024-03-30 19:07:44 +0000 UTC
+2024-03-30 19:07:46 +0000 UTC
+2024-03-30 19:07:48 +0000 UTC
+2024-03-30 19:07:50 +0000 UTC
+read escape sequence
+[japan@centos Exercise1.5]$ exit
+
+Script done on Sat 30 Mar 2024 03:07:56 PM EDT

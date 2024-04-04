@@ -1,0 +1,20 @@
+FROM golang@sha256:06b538f1c9d785537f4d24b0ee7297e8b2381dae954bd33c19513cc6465c4171
+
+#set workdir
+WORKDIR /usr/src/app
+
+#copy all project files
+COPY . .
+
+#setting environment variable
+ENV PORT=8080
+ENV REQUEST_ORIGIN=http://127.0.0.1:3001
+
+#building project as per README
+RUN go build
+
+#exposing the container port
+EXPOSE 8080
+
+#execute the project or serverfile
+CMD ./server

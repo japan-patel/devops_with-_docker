@@ -8,6 +8,8 @@ COPY . .
 
 #setting environment variable
 ENV PORT=8080
+
+#ENV for request coming from front end container, whose IP was localhost:3001
 ENV REQUEST_ORIGIN=http://127.0.0.1:3001
 
 #building project as per README

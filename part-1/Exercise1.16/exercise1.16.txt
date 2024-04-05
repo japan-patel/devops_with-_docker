@@ -1,0 +1,5 @@
+Description: Using docker file in this folder I created docker container to host my webpage. I have levaraged the docker's official apache image to host my webpage. With the image I created for my webpage, I pushed it to docker and then deployed to Render's web service to utilize free tier and host it
+
+*note* Site might go down depending on the time when you check the website. It is hosted on Render
+
+url: https://sample-website-7hz3.onrender.com

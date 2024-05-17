@@ -1,0 +1,1 @@
+changes were made to nginx config file to specify the correct url for the requests to be send to backend

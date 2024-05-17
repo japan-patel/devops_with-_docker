@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+   
+    reverse-proxy:
+        image: nginx:latest
+        volumes:
+           - ~/Devops_with_docker/devops_with_docker/part-2/Exercise2.8/nginx.conf:/etc/nginx/nginx.conf
+        ports:
+         - "80:80"
+        networks:
+         - app-network
+    
+    example-frontend:
+        image: example-frontend:latest
+        build: ./example-frontend/
+        environment:
+          - REACT_APP_BACKEND_URL=http://example-backend:8080
+      # ports:(commenting it out since docker compose will make them communicate)
+        #  - "3001:5000"
+        command: serve -s -l 5000 build
+        networks:
+          - app-network
+
+    example-backend:
+        image: example-backend:latest
+        build: ./example-backend/
+        environment: 
+          - PORT=8080
+          - REQUEST_ORIGIN=http://reverse-proxy:80
+          - REDIS_HOST=redis_imple
+          - POSTGRES_HOST=postgres_db
+       # ports:  (commeting it out since docker compose will make them communicate internally)
+       #   - "8080:8080"
+        command: ./server
+        networks:
+          - app-network
+        depends_on:
+          - redis_imple
+          - postgres_db
+
+    redis_imple:
+        image: redis:latest
+        networks:
+           - app-network
+
+    postgres_db:
+        image: postgres:latest
+        environment:
+           - POSTGRES_USER=postgres
+           - POSTGRES_PASSWORD=postgres
+           - POSTGRES_DATABASE=postgres
+        volumes:
+           - db_storage:/var/lib/postgresql/data
+        networks:
+           - app-network
+
+volumes:
+    db_storage:
+
+networks:
+    app-network:
+     name: app-network 

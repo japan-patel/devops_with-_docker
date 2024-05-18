@@ -1,0 +1,5 @@
+-Created two containers with docker compose for POstgres database environment accessible through web through pgadmin
+
+-This setup provides easy GUI access to datbase for administration purposes. This environment doesn't interfer with local system where other apps or similar versions can make it hard to run postgres
+
+

@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+
+   postgres_cont:
+     image: postgres:latest
+     environment: 
+      - POSTGRES_PASSWORD=xyz 
+     
+
+   pgadmin_cont:
+     image: dpage/pgadmin4:latest
+     environment:
+      - PGADMIN_DEFAULT_EMAIL=testity45356@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+      - PGADMIN_LISTEN_ADDRESS=0.0.0.0
+     ports:
+      - "5035:80"

@@ -1,0 +1,30 @@
+#installing node, which has base image as linux
+FROM node:16.1.0-alpine3.13
+
+RUN adduser -h /home/test -D test
+
+#setting workdir
+WORKDIR /home/test/app
+
+##copy project files
+COPY . .
+
+#install npm
+RUN npm install && npm run build && npm install -g serve
+
+#build static files with the following command
+#RUN npm run build
+
+#serve the project using npm package server
+#RUN npm install -g serve
+
+#expose the port to be able to access it
+EXPOSE 5000
+
+USER test
+
+#run the app or serve the app on container's port 5000
+CMD serve -s -l 5000 build
+
+
+

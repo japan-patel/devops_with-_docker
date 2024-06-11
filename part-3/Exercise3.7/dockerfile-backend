@@ -1,0 +1,25 @@
+FROM golang:alpine3.20
+
+
+#setting environment variable
+ENV PORT=8080
+ENV REQUEST_ORIGIN=http://localhost:8080/ping
+
+#building project as per README
+
+RUN adduser -h /home/test -D test
+
+USER test
+
+WORKDIR /home/test/app
+
+COPY . .
+
+RUN go build
+
+
+#exposing the container port
+EXPOSE 8080
+
+#execute the project or serverfile
+CMD ./server

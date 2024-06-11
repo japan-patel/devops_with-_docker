@@ -1,0 +1,33 @@
+#installing node, which has base image as linux
+FROM node:16.1.0-alpine3.13 as build-stage
+
+RUN adduser -h /home/test -D test
+
+#setting workdir
+WORKDIR /home/test/app
+
+##copy project files
+COPY . .
+
+#install npm
+RUN npm install && npm run build && npm install -g serve
+
+#build static files with the following command
+#RUN npm run build
+
+#serve the project using npm package server
+#RUN npm install -g serve
+
+#expose the port to be able to access it
+
+USER test
+
+
+FROM nginx:stable-alpine-perl
+
+COPY --from=build-stage /home/test/app/build/ /usr/share/nginx/html
+
+ENV REACT_APP_BACKEND_URL=http://localhost:5001
+
+EXPOSE 8080
+

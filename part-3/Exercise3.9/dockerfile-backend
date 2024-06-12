@@ -1,0 +1,26 @@
+FROM golang:alpine3.20 as build-stage
+
+#building project as per README
+
+RUN adduser -h /home/test -D test
+
+USER test
+
+WORKDIR /home/test/app
+
+COPY . .
+
+RUN go build
+
+
+#FInal image
+
+FROM scratch
+
+COPY --from=build-stage /home/test/app/server /
+
+ENV REQUEST_ORIGIN=http://127.0.0.1:8000 PORT=8080
+
+EXPOSE 8080
+
+CMD ["/server"]

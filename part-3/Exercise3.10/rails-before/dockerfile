@@ -1,0 +1,26 @@
+FROM ruby:3.1.0
+
+WORKDIR /home/app
+
+COPY . .
+
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x -o nodesource_setup.sh
+
+RUN bash nodesource_setup.sh
+
+RUN apt-get install -y nodejs
+
+RUN apt-get install sqlite3
+
+RUN gem install bundler:2.3.3
+
+RUN bundle install
+
+RUN rake assets:precompile
+
+RUN rails db:migrate RAILS_ENV=production
+
+
+EXPOSE 3000
+
+CMD ["rails","s","-e","production"]
